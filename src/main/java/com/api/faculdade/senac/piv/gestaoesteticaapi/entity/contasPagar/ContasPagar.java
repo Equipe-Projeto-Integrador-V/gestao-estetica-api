@@ -1,12 +1,15 @@
 package com.api.faculdade.senac.piv.gestaoesteticaapi.entity.contasPagar;
 
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.fornecedor.Fornecedor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "contas_pagar")
+@Getter@Setter
 public class ContasPagar {
 
     @Id
