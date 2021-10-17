@@ -6,6 +6,8 @@ import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.servico.Servico;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -20,9 +22,11 @@ public class Agendamento {
     private Long id;
 
     @Column(name = "data")
+    @NotNull(message = "{campo.data.agendamento.obrigatorio}")
     private LocalDate data;
 
     @Column(name = "hora")
+    @NotNull(message = "{campo.hora.agendamento.obrigatorio}")
     private LocalTime hora;
 
     @Column(name = "observacao")
@@ -30,13 +34,16 @@ public class Agendamento {
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
+    @NotNull(message = "{campo.cliente.obrigatorio}")
     private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name = "id_funcionario")
+    @NotNull(message = "{campo.funcionario.obrigatorio}")
     private Funcionario funcionario;
 
     @ManyToOne
     @JoinColumn(name = "id_servico")
+    @NotNull(message = "{campo.ordem.servico.obrigatorio}")
     private Servico servico;
 }

@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/contasreceber")
 public class ContasReceberController {
@@ -16,7 +18,7 @@ public class ContasReceberController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ContasReceber salvarContasReceber(@RequestBody ContasReceber contasReceber){
+    public ContasReceber salvarContasReceber(@RequestBody @Valid ContasReceber contasReceber){
         return contasReceberRepository.save(contasReceber);
     }
 
@@ -36,7 +38,7 @@ public class ContasReceberController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateContasReceber(@PathVariable Long id, @RequestBody ContasReceber contasReceber){
+    public void updateContasReceber(@PathVariable Long id, @RequestBody @Valid ContasReceber contasReceber){
         contasReceberRepository.findById(id).map( contasReceberExiste -> {
             contasReceber.setId(contasReceberExiste.getId());
             contasReceberRepository.save(contasReceber);

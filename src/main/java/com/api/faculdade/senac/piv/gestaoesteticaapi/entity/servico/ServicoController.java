@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/servicos")
 public class ServicoController {
@@ -35,7 +37,7 @@ public class ServicoController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateServico(@PathVariable Long id, @RequestBody Servico servico){
+    public void updateServico(@PathVariable Long id, @RequestBody @Valid Servico servico){
         servicoRepository.findById(id).map( servicoExiste -> {
             servico.setId(servicoExiste.getId());
             servicoRepository.save(servico);

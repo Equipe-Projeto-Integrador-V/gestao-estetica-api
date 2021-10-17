@@ -5,6 +5,8 @@ import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.ordemServico.OrdemSe
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -17,12 +19,15 @@ public class ContasReceber {
     private Long id;
 
     @Column(name = "data_emissao")
+    @NotEmpty(message = "{campo.data.emissao.obrigatorio}")
     private LocalDate emissao;
 
     @Column(name = "data_vencimento")
+    @NotEmpty(message = "{campo.data.vencimento.obrigatorio}")
     private LocalDate vencimento;
 
     @Column(name = "valor")
+    @NotEmpty(message = "{campo.valor.obrigatorio}")
     private Float valor;
 
     @Column(name = "valor_recebido")
@@ -31,15 +36,17 @@ public class ContasReceber {
     @Column(name = "data_recebimento")
     private LocalDate recebimento;
 
-    @Column(name = "status")
+    @Column(name = "status") //criar uma anotação especifica para status: Aberto, Cancelado, Recebido
     private String status;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
+    @NotNull(message = "{campo.cliente.obrigatorio}")
     private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name = "id_ordem_servico")
+    @NotNull(message = "{campo.ordem.servico.obrigatorio}")
     private OrdemServico ordemServico;
 
 }

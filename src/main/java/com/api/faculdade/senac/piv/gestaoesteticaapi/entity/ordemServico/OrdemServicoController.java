@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/ordemservicos")
 public class OrdemServicoController {
@@ -16,7 +18,7 @@ public class OrdemServicoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public OrdemServico salvarOrdemServico(@RequestBody OrdemServico ordemServico){
+    public OrdemServico salvarOrdemServico(@RequestBody @Valid OrdemServico ordemServico){
         return ordemServicoRepository.save(ordemServico);
     }
 
@@ -36,7 +38,7 @@ public class OrdemServicoController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateOrdemServico(@PathVariable Long id, @RequestBody OrdemServico ordemServico){
+    public void updateOrdemServico(@PathVariable Long id, @RequestBody @Valid OrdemServico ordemServico){
         ordemServicoRepository.findById(id).map( ordemServicoExiste -> {
             ordemServico.setId(ordemServicoExiste.getId());
             ordemServicoRepository.save(ordemServico);

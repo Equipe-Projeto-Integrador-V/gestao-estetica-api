@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -39,17 +40,21 @@ public class  OrdemServico {
 
     @ManyToOne
     @JoinColumn(name = "id_agendamento")
+    @NotNull(message = "{campo.agendamento.obrigatorio}")
     private Agendamento agendamento;
 
     @ManyToOne
     @JoinColumn(name = "id_servico")
+    @NotNull(message = "campo.servico.obrigatorio")
     private Servico servico;
 
     @ManyToOne
     @JoinColumn(name = "id_funcionario_os")   //funcionario responsavel por emitir a ordem de servico
+    @NotNull(message = "{campo.agendamento.os.obrigatorio}")
     private Funcionario funcionarioOs;
 
     @ManyToOne
     @JoinColumn(name = "id_funcionario_ex")  //funcionario responsavel por executar o servico
+    @NotNull(message = "{campo.agendamento.exec.obrigatorio}")
     private Funcionario funcionarioExec;
 }

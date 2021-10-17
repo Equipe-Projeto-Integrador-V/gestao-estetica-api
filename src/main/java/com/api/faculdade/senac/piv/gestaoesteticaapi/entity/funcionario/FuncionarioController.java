@@ -3,6 +3,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/funcionarios")
@@ -16,7 +18,7 @@ public class FuncionarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Funcionario salvarFuncionario(Funcionario funcionario){
+    public Funcionario salvarFuncionario(@RequestBody @Valid Funcionario funcionario){
         return funcionarioRepository.save(funcionario);
     }
 
@@ -36,7 +38,7 @@ public class FuncionarioController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateFuncionario(@PathVariable  Long id, @RequestBody Funcionario funcionario){
+    public void updateFuncionario(@PathVariable  Long id, @RequestBody @Valid Funcionario funcionario){
         funcionarioRepository.findById(id).map( funcionarioExiste -> {
             funcionario.setId(funcionarioExiste.getId());
             funcionarioRepository.save(funcionario);

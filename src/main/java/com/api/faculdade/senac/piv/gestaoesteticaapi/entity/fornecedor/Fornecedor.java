@@ -3,9 +3,9 @@ package com.api.faculdade.senac.piv.gestaoesteticaapi.entity.fornecedor;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "fornecedor")
@@ -17,6 +17,7 @@ public class Fornecedor {
     private Long id;
 
     @Column(name = "nome")
+    @NotEmpty(message = "{campo.nome.obrigatorio}")
     private String nome;
 
     @Column(name = "telefone")

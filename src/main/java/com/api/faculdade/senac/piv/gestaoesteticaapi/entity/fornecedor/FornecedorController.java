@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/fornecedores")
 public class FornecedorController{
@@ -16,7 +18,7 @@ public class FornecedorController{
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Fornecedor salvarFornecedor(@RequestBody Fornecedor fornecedor){
+    public Fornecedor salvarFornecedor(@RequestBody @Valid Fornecedor fornecedor){
         return fornecedorRepository.save(fornecedor);
     }
 
@@ -37,7 +39,7 @@ public class FornecedorController{
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateFornecedor(@PathVariable Long id, @RequestBody Fornecedor fornecedor){
+    public void updateFornecedor(@PathVariable Long id, @RequestBody @Valid Fornecedor fornecedor){
         fornecedorRepository.findById(id).map( fornecedorExiste -> {
             fornecedor.setId(fornecedorExiste.getId());
             fornecedorRepository.save(fornecedor);
