@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/agendamentos")
@@ -20,6 +21,12 @@ public class AgendamentoController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Agendamento salvarAgendamento(@RequestBody @Valid Agendamento agendamento){
+        List<Agendamento> agendamentoConflito = agendamentoRepository.findAll();
+        agendamentoConflito.forEach( a -> {
+            if(a.getData().equals(agendamento.getData()) && a.getHora().equals(agendamento.getHora())){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Agendamento nessa data e horario já existe");
+            }
+        });
         return agendamentoRepository.save(agendamento);
     }
 
@@ -45,5 +52,10 @@ public class AgendamentoController {
             agendamentoRepository.save(agendamento);
             return agendamentoExiste;
         }).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Agendamento não encontradop"));
+    }
+
+    @GetMapping("/listar")
+    public List<Agendamento> listar(){
+        return agendamentoRepository.findAll();
     }
 }
