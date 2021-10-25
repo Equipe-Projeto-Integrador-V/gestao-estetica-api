@@ -6,15 +6,23 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/clientes")
+@CrossOrigin( origins = "http://localhost:4200")
 public class ClienteController {
 
     private final ClienteRepository clienteRepository;
 
     public ClienteController(ClienteRepository clienteRepository){
         this.clienteRepository = clienteRepository;
+    }
+
+
+    @GetMapping
+    public List<Cliente> obterTodosClientes(){
+        return clienteRepository.findAll();
     }
 
     @PostMapping

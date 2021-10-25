@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/fornecedores")
+@CrossOrigin( origins = "http://localhost:4200")
 public class FornecedorController{
 
     private final FornecedorRepository fornecedorRepository;

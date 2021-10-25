@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/servicos")
+@CrossOrigin( origins = "http://localhost:4200")
 public class ServicoController {
 
     private final ServicoRepository servicoRepository;
@@ -17,7 +18,7 @@ public class ServicoController {
     }
 
     @PostMapping
-    public Servico salvarServico(@RequestBody Servico servico){
+    public Servico salvarServico(@RequestBody @Valid Servico servico){
         return servicoRepository.save(servico);
     }
 

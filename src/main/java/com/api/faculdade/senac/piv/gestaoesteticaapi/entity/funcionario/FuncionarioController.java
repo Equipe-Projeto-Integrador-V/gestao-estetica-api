@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/funcionarios")
+@CrossOrigin( origins = "http://localhost:4200")
 public class FuncionarioController {
 
     private final FuncionarioRepository funcionarioRepository;
