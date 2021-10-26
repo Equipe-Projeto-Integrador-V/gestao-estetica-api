@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/servicos")
@@ -20,6 +21,11 @@ public class ServicoController {
     @PostMapping
     public Servico salvarServico(@RequestBody @Valid Servico servico){
         return servicoRepository.save(servico);
+    }
+
+    @GetMapping
+    public List<Servico> listarTodosServicos(){
+        return servicoRepository.findAll();
     }
 
     @GetMapping("{id}")

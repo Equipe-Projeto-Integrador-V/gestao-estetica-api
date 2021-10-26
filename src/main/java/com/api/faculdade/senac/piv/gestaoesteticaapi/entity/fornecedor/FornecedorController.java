@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/fornecedores")
@@ -21,6 +22,11 @@ public class FornecedorController{
     @ResponseStatus(HttpStatus.CREATED)
     public Fornecedor salvarFornecedor(@RequestBody @Valid Fornecedor fornecedor){
         return fornecedorRepository.save(fornecedor);
+    }
+
+    @GetMapping
+    public List<Fornecedor> listarTodosFornecedores(){
+        return fornecedorRepository.findAll();
     }
 
     @GetMapping("{id}")

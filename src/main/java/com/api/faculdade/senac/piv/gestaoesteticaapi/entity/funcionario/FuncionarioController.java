@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -17,6 +18,10 @@ public class FuncionarioController {
         this.funcionarioRepository = funcionarioRepository;
     }
 
+    @GetMapping
+    public List<Funcionario> listarTodosFuncionarios(){
+        return funcionarioRepository.findAll();
+    }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Funcionario salvarFuncionario(@RequestBody @Valid Funcionario funcionario){
@@ -25,7 +30,7 @@ public class FuncionarioController {
 
     @GetMapping("{id}")
     public Funcionario acharPorId(@PathVariable Long id){
-        return funcionarioRepository.findById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
+        return funcionarioRepository.findById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionario não encontrado"));
     }
 
     @DeleteMapping("{id}")
