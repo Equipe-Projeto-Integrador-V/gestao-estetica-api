@@ -2,6 +2,7 @@ package com.api.faculdade.senac.piv.gestaoesteticaapi.entity.contasReceber;
 
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.cliente.Cliente;
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.ordemServico.OrdemServico;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -19,10 +20,12 @@ public class ContasReceber {
     private Long id;
 
     @Column(name = "data_emissao")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotEmpty(message = "{campo.data.emissao.obrigatorio}")
     private LocalDate emissao;
 
     @Column(name = "data_vencimento")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotEmpty(message = "{campo.data.vencimento.obrigatorio}")
     private LocalDate vencimento;
 
@@ -34,6 +37,7 @@ public class ContasReceber {
     private Float valorRecebido;
 
     @Column(name = "data_recebimento")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate recebimento;
 
     @Column(name = "status") //criar uma anotação especifica para status: Aberto, Cancelado, Recebido

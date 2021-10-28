@@ -3,6 +3,7 @@ package com.api.faculdade.senac.piv.gestaoesteticaapi.entity.agendamento;
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.cliente.Cliente;
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.funcionario.Funcionario;
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.servico.Servico;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Agendamento {
     private Long id;
 
     @Column(name = "data")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotNull(message = "{campo.data.agendamento.obrigatorio}")
     private LocalDate data;
 

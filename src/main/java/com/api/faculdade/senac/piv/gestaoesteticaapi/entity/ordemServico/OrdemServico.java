@@ -3,6 +3,7 @@ package com.api.faculdade.senac.piv.gestaoesteticaapi.entity.ordemServico;
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.agendamento.Agendamento;
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.funcionario.Funcionario;
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.servico.Servico;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,9 +22,11 @@ public class  OrdemServico {
     private Long id;
 
     @Column(name = "data_inicio")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataInicio;
 
     @Column(name = "data_final")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFinal;
 
     @Column(name = "hora_inicio")

@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "servico")
@@ -22,9 +23,9 @@ public class Servico {
 
     @Column(name = "preco_custo")
     @NotNull(message = "{campo.preco.custo.obrigatorio}")
-    private Float precoCusto;
+    private BigDecimal precoCusto;
 
     @Column(name = "preco_venda")
     @NotNull(message = "{campo.preco.venda.obrigatorio}")
-    private Float precoVenda;
+    private BigDecimal precoVenda;
 }

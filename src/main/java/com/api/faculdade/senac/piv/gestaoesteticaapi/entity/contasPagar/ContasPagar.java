@@ -1,6 +1,7 @@
 package com.api.faculdade.senac.piv.gestaoesteticaapi.entity.contasPagar;
 
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.fornecedor.Fornecedor;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,10 +20,12 @@ public class ContasPagar {
     private Long id;
 
     @Column(name = "data_emissao")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotEmpty(message = "{campo.data.emissao.obrigatorio}")
     private LocalDate emissao;
 
     @Column(name = "data_vencimento")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotEmpty(message = "{campo.data.vencimento.obrigatorio}")
     private LocalDate vencimento;
 
@@ -34,6 +37,7 @@ public class ContasPagar {
     private Float valorPago;
 
     @Column(name = "data_pagamento")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate pagamento;
 
     @Column(name = "status")  //criar uma anotação especifica para status: Aberto, Cancelado, Pago
