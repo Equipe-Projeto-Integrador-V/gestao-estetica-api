@@ -28,8 +28,16 @@ public class ClienteController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente salvarCliente(@RequestBody @Valid Cliente cliente){
+        List<Cliente> todosClientesSalvos = clienteRepository.findAll();
+        todosClientesSalvos.forEach( c -> {
+            if(c.getCpf().equalsIgnoreCase(cliente.getCpf())){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Já Existe um Cliente com o mesmo CPF");
+            }
+        });
+
         return clienteRepository.save(cliente);
     }
+
 
     @GetMapping("{id}")
     public Cliente acharPorId(@PathVariable Long id){
