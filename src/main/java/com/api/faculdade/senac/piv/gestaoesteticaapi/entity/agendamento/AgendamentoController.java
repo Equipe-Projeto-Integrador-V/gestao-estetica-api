@@ -15,11 +15,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("api/agendamentos")
+@RequestMapping("/api/agendamentos")
+@CrossOrigin( origins = "http://localhost:4200")
 public class AgendamentoController {
 
     private final AgendamentoRepository agendamentoRepository;
@@ -38,17 +38,17 @@ public class AgendamentoController {
         agendamento.setHora(dto.getHora());
         agendamento.setObservacao(dto.getObservacao());
         Cliente cliente = clienteRepository
-                          .findById(dto.getIdCliente())
+                          .findById(dto.getCliente())
                            .orElseThrow(
                                    () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente inexistente"));
 
         agendamento.setCliente(cliente);
         Funcionario funcionario = funcionarioRepository
-                                   .findById(dto.getIdFuncionario())
+                                   .findById(dto.getFuncionario())
                                               .orElseThrow( () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Funcionario inexistente"));
         agendamento.setFuncionario(funcionario);
         Servico servico = servicoRepository
-                                .findById(dto.getIdServico())
+                                .findById(dto.getServico())
                                     .orElseThrow( () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Servico inexistente"));
         agendamento.setServico(servico);
 

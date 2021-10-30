@@ -15,7 +15,7 @@ public class AgendamentoDTO {
     private LocalDate data;
     private LocalTime hora;
     private String observacao;
-    private Long idCliente;
-    private Long idFuncionario;
-    private Long idServico;
+    private Long cliente;
+    private Long funcionario;
+    private Long servico;
 }
