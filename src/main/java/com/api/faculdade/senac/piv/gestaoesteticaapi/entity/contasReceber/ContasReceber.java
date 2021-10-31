@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -21,20 +22,20 @@ public class ContasReceber {
 
     @Column(name = "data_emissao")
     @JsonFormat(pattern = "dd/MM/yyyy")
-    @NotEmpty(message = "{campo.data.emissao.obrigatorio}")
+    @NotNull(message = "{campo.data.emissao.obrigatorio}")
     private LocalDate emissao;
 
     @Column(name = "data_vencimento")
     @JsonFormat(pattern = "dd/MM/yyyy")
-    @NotEmpty(message = "{campo.data.vencimento.obrigatorio}")
+    @NotNull(message = "{campo.data.vencimento.obrigatorio}")
     private LocalDate vencimento;
 
     @Column(name = "valor")
-    @NotEmpty(message = "{campo.valor.obrigatorio}")
-    private Float valor;
+    @NotNull(message = "{campo.valor.obrigatorio}")
+    private BigDecimal valor;
 
     @Column(name = "valor_recebido")
-    private Float valorRecebido;
+    private BigDecimal valorRecebido;
 
     @Column(name = "data_recebimento")
     @JsonFormat(pattern = "dd/MM/yyyy")

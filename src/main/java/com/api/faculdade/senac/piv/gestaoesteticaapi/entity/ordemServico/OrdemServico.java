@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -39,17 +40,13 @@ public class  OrdemServico {
     private String status;
 
     @Column(name = "valor")
-    private Float valor;
+    private BigDecimal valor;
 
     @ManyToOne
     @JoinColumn(name = "id_agendamento")
     @NotNull(message = "{campo.agendamento.obrigatorio}")
     private Agendamento agendamento;
 
-    @ManyToOne
-    @JoinColumn(name = "id_servico")
-    @NotNull(message = "campo.servico.obrigatorio")
-    private Servico servico;
 
     @ManyToOne
     @JoinColumn(name = "id_funcionario_os")   //funcionario responsavel por emitir a ordem de servico

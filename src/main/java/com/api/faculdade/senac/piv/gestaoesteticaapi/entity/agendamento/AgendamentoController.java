@@ -19,7 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/agendamentos")
-@CrossOrigin( origins = "http://localhost:4200")
 public class AgendamentoController {
 
     private final AgendamentoRepository agendamentoRepository;

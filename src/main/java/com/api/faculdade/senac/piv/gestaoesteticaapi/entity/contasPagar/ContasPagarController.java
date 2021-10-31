@@ -1,24 +1,43 @@
 package com.api.faculdade.senac.piv.gestaoesteticaapi.entity.contasPagar;
 
+import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.contasPagar.dto.ContasPagarDTO;
+import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.fornecedor.Fornecedor;
+import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.fornecedor.FornecedorRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/contaspagar")
 public class ContasPagarController {
 
     private final ContasPagarRepository contasPagarRepository;
+    private final FornecedorRepository fornecedorRepository;
 
-    public ContasPagarController(ContasPagarRepository contasPagarRepository) {
-        this.contasPagarRepository = contasPagarRepository;
-    }
+
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ContasPagar salvarContasPagar(@RequestBody @Valid ContasPagar contasPagar){
+    public ContasPagar salvarContasPagar(@RequestBody @Valid ContasPagarDTO dto){
+
+        ContasPagar contasPagar = new ContasPagar();
+        contasPagar.setEmissao(dto.getEmissao());
+        contasPagar.setVencimento(dto.getVencimento());
+        contasPagar.setValor(dto.getValor());
+        contasPagar.setValorPago(dto.getValorPago());
+        contasPagar.setPagamento(dto.getPagamento());
+        contasPagar.setStatus(dto.getStatus());
+
+        Fornecedor fornecedor = fornecedorRepository
+                .findById(dto.getFornecedor())
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado"));
+        contasPagar.setFornecedor(fornecedor);
+
         return contasPagarRepository.save(contasPagar);
     }
 

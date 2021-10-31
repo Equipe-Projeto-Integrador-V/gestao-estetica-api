@@ -23,8 +23,8 @@ public class Agendamento {
     private Long id;
 
     @Column(name = "data")
-    @JsonFormat(pattern = "dd/MM/yyyy")
     @NotNull(message = "{campo.data.agendamento.obrigatorio}")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate data;
 
     @Column(name = "hora")
