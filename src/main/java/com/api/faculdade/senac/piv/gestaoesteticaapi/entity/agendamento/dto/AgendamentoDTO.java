@@ -15,7 +15,6 @@ import java.time.LocalTime;
 public class AgendamentoDTO {
 
     @NotNull(message = "{campo.data.agendamento.obrigatorio}")
-    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate data;
 
     @NotNull(message = "{campo.hora.agendamento.obrigatorio}")
