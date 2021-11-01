@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -85,6 +86,11 @@ public class OrdemServicoController {
             ordemServicoRepository.save(ordemServico);
             return ordemServicoExiste;
         }).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ordem de Serviço não encontrada"));
+    }
+
+    @GetMapping
+    public List<OrdemServico> obterAllOrdensDeServico(){
+        return ordemServicoRepository.findAll();
     }
 
 }
