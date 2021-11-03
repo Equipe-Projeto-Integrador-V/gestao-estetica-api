@@ -5,7 +5,7 @@
 `Spring - 2.5.5` <br>
 `Lombok` (Necessário o plugin, de acordo com sua IDE).
 
-##Banco de dados
+## Banco de dados <br>
 `application.properties`<br>
 Em: `spring.profiles.active` existe duas variáveis: `prod` e `dev`.
 Se escolher a "prod" o banco usado pela aplicação será um postgresql,
