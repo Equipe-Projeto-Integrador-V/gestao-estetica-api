@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
@@ -47,6 +49,11 @@ public class ContasReceberController {
         contasReceber.setOrdemServico(ordemServico);
 
         return contasReceberRepository.save(contasReceber);
+    }
+    
+    @GetMapping
+    public List<ContasReceber> getTodasContasReceber() {
+    	return contasReceberRepository.findAll();
     }
 
     @GetMapping("{id}")
