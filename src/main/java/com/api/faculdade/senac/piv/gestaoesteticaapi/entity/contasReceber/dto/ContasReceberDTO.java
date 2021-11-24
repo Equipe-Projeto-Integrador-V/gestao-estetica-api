@@ -1,5 +1,6 @@
 package com.api.faculdade.senac.piv.gestaoesteticaapi.entity.contasReceber.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,10 +11,13 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ContasReceberDTO {
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate emissao;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate vencimento;
     private BigDecimal valor;
     private BigDecimal valorRecebido;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate recebimento;
     private String status;
     private Long cliente;
