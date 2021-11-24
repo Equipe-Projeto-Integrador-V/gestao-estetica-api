@@ -3,6 +3,7 @@ package com.api.faculdade.senac.piv.gestaoesteticaapi.entity.agendamento;
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.cliente.Cliente;
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.funcionario.Funcionario;
 import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.servico.Servico;
+import com.api.faculdade.senac.piv.gestaoesteticaapi.enums.StatusAgendamento;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,4 +49,12 @@ public class Agendamento {
     @JoinColumn(name = "id_servico")
     @NotNull(message = "{campo.ordem.servico.obrigatorio}")
     private Servico servico;
+
+
+ /*   @Enumerated
+    @Column(name = "status")
+    private StatusAgendamento statusAgendamento;
+
+ */
+
 }
