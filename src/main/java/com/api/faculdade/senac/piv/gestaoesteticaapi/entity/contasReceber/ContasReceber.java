@@ -21,12 +21,12 @@ public class ContasReceber {
     private Long id;
 
     @Column(name = "data_emissao")
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
     @NotNull(message = "{campo.data.emissao.obrigatorio}")
     private LocalDate emissao;
 
     @Column(name = "data_vencimento")
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
     @NotNull(message = "{campo.data.vencimento.obrigatorio}")
     private LocalDate vencimento;
 
@@ -38,7 +38,7 @@ public class ContasReceber {
     private BigDecimal valorRecebido;
 
     @Column(name = "data_recebimento")
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
     private LocalDate recebimento;
 
     @Column(name = "status") //criar uma anotação especifica para status: Aberto, Cancelado, Recebido
