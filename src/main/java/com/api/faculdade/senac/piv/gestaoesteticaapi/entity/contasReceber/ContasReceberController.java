@@ -26,7 +26,7 @@ public class ContasReceberController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ContasReceber salvarContasReceber(@RequestBody @Valid ContasReceberDTO dto){
+    public ContasReceber salvarContasReceber(@RequestBody @Valid ContasReceberDTO dto) {
 
         ContasReceber contasReceber = new ContasReceber();
         contasReceber.setEmissao(dto.getEmissao());
@@ -72,9 +72,31 @@ public class ContasReceberController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateContasReceber(@PathVariable Long id, @RequestBody @Valid ContasReceber contasReceber){
+    public void updateContasReceber(@PathVariable Long id, @RequestBody @Valid ContasReceberDTO dto){
+    	System.out.println("teste");
+    	ContasReceber contasReceber = new ContasReceber();
         contasReceberRepository.findById(id).map( contasReceberExiste -> {
+        	
             contasReceber.setId(contasReceberExiste.getId());
+            contasReceber.setEmissao(dto.getEmissao());
+            contasReceber.setVencimento(dto.getVencimento());
+            contasReceber.setValor(dto.getValor());
+            contasReceber.setValorRecebido(dto.getValorRecebido());
+            contasReceber.setRecebimento(dto.getRecebimento());
+            contasReceber.setStatus(dto.getStatus());
+
+            Cliente cliente = clienteRepository
+                    .findById(dto.getCliente())
+                    .orElseThrow(
+                            () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
+            contasReceber.setCliente(cliente);
+
+            OrdemServico ordemServico = ordemServicoRepository
+                    .findById(dto.getOrdemServico())
+                    .orElseThrow(
+                            () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ordem de Serviço não encontrado"));
+            contasReceber.setOrdemServico(ordemServico);
+            
             contasReceberRepository.save(contasReceber);
             return contasReceberExiste;
         }).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Contas a Receber não encontrado"));

@@ -11,13 +11,13 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ContasReceberDTO {
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
     private LocalDate emissao;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
     private LocalDate vencimento;
     private BigDecimal valor;
     private BigDecimal valorRecebido;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
     private LocalDate recebimento;
     private String status;
     private Long cliente;
