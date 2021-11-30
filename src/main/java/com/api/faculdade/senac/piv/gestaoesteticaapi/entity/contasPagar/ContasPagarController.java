@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -63,5 +64,11 @@ public class ContasPagarController {
             contasPagarRepository.save(contasPagar);
             return contasPagarExiste;
         }).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Contas a Pagar Não encontrado"));
+    }
+
+
+    @GetMapping
+    public List<ContasPagar> listar(){
+        return contasPagarRepository.findAll();
     }
 }

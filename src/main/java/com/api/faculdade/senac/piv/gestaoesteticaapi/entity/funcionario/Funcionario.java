@@ -39,4 +39,7 @@ public class Funcionario {
 
     @Column(name = "commisao")
     private Float comissao;
+
+    @Column(name = "permissao")
+    private String permissao;
 }

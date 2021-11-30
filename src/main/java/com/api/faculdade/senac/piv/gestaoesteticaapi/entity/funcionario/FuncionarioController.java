@@ -1,30 +1,38 @@
 package com.api.faculdade.senac.piv.gestaoesteticaapi.entity.funcionario;
+import com.api.faculdade.senac.piv.gestaoesteticaapi.configs.errosapi.FuncionarioCadastroException;
+import com.api.faculdade.senac.piv.gestaoesteticaapi.entity.funcionario.services.FuncionarioAuthService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
 
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/funcionarios")
 public class FuncionarioController {
 
     private final FuncionarioRepository funcionarioRepository;
+    private final FuncionarioAuthService funcionarioAuthService;
 
-    public FuncionarioController(FuncionarioRepository funcionarioRepository){
-        this.funcionarioRepository = funcionarioRepository;
-    }
 
     @GetMapping
     public List<Funcionario> listarTodosFuncionarios(){
         return funcionarioRepository.findAll();
     }
+
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Funcionario salvarFuncionario(@RequestBody @Valid Funcionario funcionario){
-        return funcionarioRepository.save(funcionario);
+        try{
+            return funcionarioAuthService.salvarFuncionaro(funcionario);
+        }catch (FuncionarioCadastroException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @GetMapping("{id}")
