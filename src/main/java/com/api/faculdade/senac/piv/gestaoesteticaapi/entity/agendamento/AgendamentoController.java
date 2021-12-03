@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -96,5 +97,23 @@ public class AgendamentoController {
         //Uma especie de coringa, caso não passe nome completo
         //where cliente.nome like '%ulano%'
         return agendamentoRepository.findByNomeClienteAndMes("%" + nome + "%", mes);
+    }
+
+
+    @GetMapping("/quantidadeHoje")
+    public Integer quantidadeAgendamentosNoMês(){
+        LocalDate dataAtual = LocalDate.now();
+        Integer d = dataAtual.getMonthValue();
+        System.out.println(d);
+        List<Agendamento> agendamentos = agendamentoRepository.quantidadeAgendamentosMes(dataAtual);
+        return agendamentos.size();
+    }
+
+    @GetMapping("/quantidadeMes")
+    public Integer quantidadeAgendamentoNoDia(){
+        LocalDate dataAtual = LocalDate.now();
+        Integer mes = dataAtual.getMonthValue();
+        List<Agendamento> agendamentos = agendamentoRepository.acharAgendamentosMes(mes);
+        return agendamentos.size();
     }
 }

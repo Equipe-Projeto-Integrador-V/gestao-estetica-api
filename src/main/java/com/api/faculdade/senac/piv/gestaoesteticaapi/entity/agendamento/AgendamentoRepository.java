@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
@@ -19,4 +20,11 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
     //ex: Cliente : Fulano, Data: 20/02/2021 -> retorna uma lista de agendamentos desse cliente nesta data
     @Query(" select a from Agendamento a join a.cliente c where upper( c.nome) like upper(:nome) and a.data =:data ")
     List<Agendamento> findByNomeClienteAndDataCompleta(@Param("data") LocalDate data, @Param("nome") String nome);
+
+    @Query(" select a from Agendamento a where a.data = (:data)")
+    List<Agendamento> quantidadeAgendamentosMes(LocalDate data);
+
+
+    @Query(" select a from Agendamento a where MONTH(a.data) =:mes ")
+    List<Agendamento>acharAgendamentosMes(Integer mes);
 }
