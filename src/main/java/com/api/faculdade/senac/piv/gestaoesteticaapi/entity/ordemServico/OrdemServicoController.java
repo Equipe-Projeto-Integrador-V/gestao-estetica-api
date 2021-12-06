@@ -93,4 +93,10 @@ public class OrdemServicoController {
         return ordemServicoRepository.findAll();
     }
 
+
+    @GetMapping("/totalOsStatus")
+    public Integer obterTotalOrdemServicoStatus(@RequestParam(value = "status", required = true) String status){
+        return ordemServicoRepository.totalStatusOrdemServico(status);
+    }
+
 }
