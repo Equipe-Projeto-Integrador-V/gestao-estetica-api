@@ -56,12 +56,23 @@ public class ContasPagarController {
         }).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Contas a Pagar Não encontrado"));
     }
 
-    @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public void updateContasPagar(@PathVariable Long id, @RequestBody @Valid ContasPagar contasPagar){
+    @PutMapping("/{id}")
+    public void updateContasPagar(@PathVariable Long id, @RequestBody @Valid ContasPagarDTO contasPagardto){
         contasPagarRepository.findById(id).map( contasPagarExiste -> {
-            contasPagar.setId(contasPagarExiste.getId());
-            contasPagarRepository.save(contasPagar);
+
+            contasPagarExiste.setId(id);
+            contasPagarExiste.setPagamento(contasPagardto.getPagamento());
+            contasPagarExiste.setEmissao(contasPagardto.getEmissao());
+            contasPagarExiste.setStatus(contasPagardto.getStatus());
+            contasPagarExiste.setValor(contasPagardto.getValor());
+            contasPagarExiste.setValorPago(contasPagardto.getValorPago());
+            contasPagarExiste.setVencimento(contasPagardto.getVencimento());
+            Fornecedor fornecedor = fornecedorRepository.findById(contasPagardto.getFornecedor()).orElseThrow(
+                    () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontraod"));
+
+            contasPagarExiste.setFornecedor(fornecedor);
+            //contasPagar.setId(contasPagarExiste.getId());
+            contasPagarRepository.save(contasPagarExiste);
             return contasPagarExiste;
         }).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Contas a Pagar Não encontrado"));
     }
@@ -71,4 +82,25 @@ public class ContasPagarController {
     public List<ContasPagar> listar(){
         return contasPagarRepository.findAll();
     }
+
+/*
+    public ContasPagarDTO converterParaDto(ContasPagar contasPagar){
+        ContasPagar contasPagarEncontrado = contasPagarRepository.findById(contasPagar.getId()).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não achado"));
+        ContasPagarDTO contasPagarDTO = new ContasPagarDTO();
+        contasPagarDTO.setPagamento(contasPagarEncontrado.getPagamento());
+        contasPagarDTO.setStatus(contasPagarEncontrado.getStatus());
+        contasPagarDTO.setEmissao(contasPagarEncontrado.getEmissao());
+        contasPagarDTO.setValor(contasPagarEncontrado.getValor());
+        contasPagarDTO.setValorPago(contasPagarEncontrado.getValorPago());
+        contasPagarDTO.setFornecedor(contasPagarEncontrado.getFornecedor().getId());
+
+
+        return contasPagarDTO;
+    }
+*/
+
 }
+
+
+
